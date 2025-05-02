@@ -1,3 +1,4 @@
+const e = require("express");
 const { default: mongoose } = require("mongoose");
 
 const directorSchema = new mongoose.Schema({
@@ -7,6 +8,15 @@ const directorSchema = new mongoose.Schema({
     },
     age: {
         type: Number,
+        required: false,
+    },
+    email: {
+        type: String,
+        required: true,
+
+    },
+    password: {
+        type: String,
         required: true,
     },
     films: [{

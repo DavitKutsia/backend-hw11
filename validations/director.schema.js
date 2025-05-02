@@ -11,6 +11,16 @@ const directorSchema = Joi.object({
         'number.empty': 'Age is required',
         'number.min': 'Age must be at least 18',
         'number.max': 'Age must be at most 99',
+    }),
+    email:  Joi.string().email().required().messages({
+        'string.base': 'Email must be a string',
+        'string.empty': 'Email is required',
+        'string.email': 'Invalid email format',
+    }),
+    password: Joi.string().min(8).required().messages({
+        'string.base': 'Password must be a string',
+        'string.empty': 'Password is required',
+        'string.min': 'Password must be at least 8 characters long',
     })
 });
 

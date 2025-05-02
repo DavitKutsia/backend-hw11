@@ -17,10 +17,10 @@ directorsRouter.post("/", async (req, res) => {
     if (error) {
         return res.status(400).json({ error: error.details[0].message });
     }
-    const { name, age } = value;
+    const { name, age, email, password } = value;
 
 
-    const newDirector = await Director.create({ name, age });
+    const newDirector = await Director.create({ name, age, email, password });
     res.status(201).json({ message: "Created successfully", data: newDirector });
 });
 
@@ -52,8 +52,8 @@ directorsRouter.put("/:id", async (req, res) => {
         return res.status(400).json({ message: "Invalid director ID" });
     }
 
-    const { name, age } = req.body;
-    if (!name && !age) {
+    const { name, age, email, password } = req.body;
+    if (!name && !age && !email && !password) {
         return res.status(400).json({ message: "At least one field is required to update" });
     }
 
