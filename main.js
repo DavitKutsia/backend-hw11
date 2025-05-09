@@ -8,15 +8,14 @@ const cors = require("cors");
 
 connectToDb();
 
-app.use(cors())
 const app = express();
-app.use(express.json());
 
+app.use(cors());
+app.use(express.json());
 
 app.use("/directors", isAuth, directorsRouter);
 app.use("/films", isAuth, filmsRouter);
 app.use("/auth", authRouter);
-    
 
 app.listen(3000, () => {
     console.log("🚀 Server running at http://localhost:3000");
