@@ -4,11 +4,14 @@ const directorsRouter = require("./director/director.router");
 const filmsRouter = require("./film/film.router");
 const authRouter = require("./auth/auth.router");
 const isAuth = require("./middlewares/isAuth.middleware");
+const cors = require("cors");
 
+connectToDb();
+
+app.use(cors())
 const app = express();
 app.use(express.json());
 
-connectToDb();
 
 app.use("/directors", isAuth, directorsRouter);
 app.use("/films", isAuth, filmsRouter);

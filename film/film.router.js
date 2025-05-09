@@ -71,7 +71,10 @@ filmsRouter.delete('/:id', async (req, res) => {
         return res.status(404).json({ message: "Film not found" });
     }
 
-    // პოულობს რეჟისორის id-ს ფილმის მონაცემებში და pull მეთოდით შლის თავს რეჟისორის ფილმების მასივიდან
+    if(film.director.toString() !== req.directorId) {
+        return res.status(403).json({ message: "You are not allowed to delete this film" });
+    }
+
     if (film.director) {
         await Director.findByIdAndUpdate(
             film.director,
@@ -88,6 +91,10 @@ filmsRouter.put("/:id", async (req, res) => {
     
     if (!isValidObjectId(id)) {
         return res.status(400).json({ message: "Invalid film ID" });
+    }
+
+    if(film.director.toString() !== req.directorId) {
+        return res.status(403).json({ message: "You are not allowed to edit this film" });
     }
 
     const { title, director, genre, year } = req.body;
