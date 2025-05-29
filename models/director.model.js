@@ -23,6 +23,10 @@ const directorSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "film",
     }],
-});
+    avatar: {
+        type: String,
+        required: false,
+    },
+}, {timestamps: true});
 
 module.exports = mongoose.model("director", directorSchema);

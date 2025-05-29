@@ -22,6 +22,10 @@ const filmSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "director",
     },
-});
+    reactions: {
+        likes: [{type: mongoose.Schema.Types.ObjectId, ref: "director"}],
+        dislikes: [{type: mongoose.Schema.Types.ObjectId, ref: "director"}]
+    }
+}, {timestamps: true});
 
 module.exports = mongoose.model("film", filmSchema);

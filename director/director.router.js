@@ -3,6 +3,7 @@ const Director = require("../models/director.model");
 const { isValidObjectId } = require("mongoose");
 const Film = require("../models/film.model");
 const directorSchema = require("../validations/director.schema");
+const upload = require("../config/cloudinary.config");
 
 const directorsRouter = Router();
 
@@ -45,8 +46,8 @@ directorsRouter.delete('/:id', async (req, res) => {
     });
 });
 
-directorsRouter.put("/:id", async (req, res) => {
-    const { id } = req.params;
+directorsRouter.put("/", async (req, res) => {
+    const { id } = req.userId;
 
     if (!isValidObjectId(id)) {
         return res.status(400).json({ message: "Invalid director ID" });
@@ -57,10 +58,15 @@ directorsRouter.put("/:id", async (req, res) => {
         return res.status(400).json({ message: "At least one field is required to update" });
     }
 
+    // const filePath = req.file.path
+
+        
+
     const updatedDirector = await Director.findByIdAndUpdate(
         id, 
         req.body, 
-        { new: true }
+        // { avatar: filePath },
+        { new: true } 
     );
 
     res.status(200).json({ message: "Updated successfully", data: updatedDirector });
