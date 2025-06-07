@@ -18,10 +18,10 @@ directorsRouter.post("/", async (req, res) => {
     if (error) {
         return res.status(400).json({ error: error.details[0].message });
     }
-    const { name, age, email, password } = value;
+    const { name, age, email, password, role } = value;
 
 
-    const newDirector = await Director.create({ name, age, email, password });
+    const newDirector = await Director.create({ name, age, email, password, role });
     res.status(201).json({ message: "Created successfully", data: newDirector });
 });
 

@@ -8,7 +8,6 @@ require('dotenv').config();
 
 const authRouter = Router();
 
-// Register
 authRouter.post('/register', async (req, res) => {
     const { error } = directorSchema.validate(req.body || {});
     if (error) {
@@ -28,7 +27,6 @@ authRouter.post('/register', async (req, res) => {
     res.status(201).json({ message: 'Director registered successfully' });
 });
 
-// Login
 authRouter.post('/login', async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
@@ -51,7 +49,7 @@ authRouter.post('/login', async (req, res) => {
     res.status(200).json({ token });
 });
 
-// Profile (protected)
+
 authRouter.get('/profile', isAuth, async (req, res) => {
     try {
         const director = await directorModel.findById(req.directorId).select('-password');

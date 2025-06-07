@@ -27,6 +27,11 @@ const directorSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
+    role: {
+        type: String,
+        enum: ['user', 'admin'],
+        default: 'user'
+    }
 }, {timestamps: true});
 
 module.exports = mongoose.model("director", directorSchema);
