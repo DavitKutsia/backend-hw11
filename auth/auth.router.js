@@ -14,7 +14,7 @@ authRouter.post('/register', async (req, res) => {
         return res.status(400).json({ error: error.details[0].message });
     }
 
-    const { name, email, password, age } = req.body;
+    const { name, email, password, age, role } = req.body;
 
     const existingDirector = await directorModel.findOne({ email });
     if (existingDirector) {
@@ -22,7 +22,7 @@ authRouter.post('/register', async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    await directorModel.create({ name, email, password: hashedPassword, age });
+    await directorModel.create({ name, email, password: hashedPassword, age, role });
 
     res.status(201).json({ message: 'Director registered successfully' });
 });
